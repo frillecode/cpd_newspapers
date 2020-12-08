@@ -17,7 +17,7 @@ import arviz as az
 ###      ###
 ### Data ###
 ###      ### 
-
+ 
 #ombinus:
 politiken = pd.read_csv(r'/home/au617011/Documents/CHCAA/hope/cds_intro_exam/data/tabular/da_politiken-print-091820_signal.csv')
 berlingske = pd.read_csv(r'/home/au617011/Documents/CHCAA/hope/cds_intro_exam/data/tabular/da_berglinske-print-091820_signal.csv')
