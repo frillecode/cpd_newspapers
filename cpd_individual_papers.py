@@ -19,14 +19,15 @@ import ndjson
 ### Data ###
 ###      ### 
  
-#ombinus:
-politiken = pd.read_csv(r'/home/au617011/Documents/CHCAA/hope/cds_intro_exam/data/tabular/da_politiken-print-091820_signal.csv')
-berlingske = pd.read_csv(r'/home/au617011/Documents/CHCAA/hope/cds_intro_exam/data/tabular/da_berglinske-print-091820_signal.csv')
-jyllandsposten = pd.read_csv(r'/home/au617011/Documents/CHCAA/hope/cds_intro_exam/data/tabular/da_jyllands-posten-print-091820_signal.csv')
-kristeligtdagblad = pd.read_csv(r'/home/au617011/Documents/CHCAA/hope/cds_intro_exam/data/tabular/da_kristeligt-dagblad-print-091820_signal.csv')
+
+ #ombinus:
+politiken = pd.read_csv('da_politiken-print-091820_signal.csv')
+berlingske = pd.read_csv('da_berglinske-print-091820_signal.csv')
+jyllandsposten = pd.read_csv('da_jyllands-posten-print-091820_signal.csv')
+kristeligtdagblad = pd.read_csv('da_kristeligt-dagblad-print-091820_signal.csv')
 #tabloid:
-bt = pd.read_csv(r'/home/au617011/Documents/CHCAA/hope/cds_intro_exam/data/tabular/da_bt-print-091820_signal.csv')
-ekstrabladet = pd.read_csv(r'/home/au617011/Documents/CHCAA/hope/cds_intro_exam/data/tabular/da_ekstrabladet-print-091820_signal.csv')
+bt = pd.read_csv('da_bt-print-091820_signal.csv')
+ekstrabladet = pd.read_csv('da_ekstrabladet-print-091820_signal.csv')
 
 
 # Choose newspaper for analysis
@@ -42,7 +43,7 @@ df = df[df.novelty != 0]
 df = df[df.resonance != 0]
 
 
-# Date variable for analysis
+# Date variables for analysis
 df = df.sort_values(by="date")
 dates = [string[0:10] for string in df["date"]]  
 dates = [datetime.strptime(datez, '%Y-%m-%d').date() for datez in dates]
@@ -72,7 +73,6 @@ plt.title("")
 
 novelty = np.array(novelty)
 niter = 4000 #number of iterations for the MCMC algorithm
-#t = np.arange(0,len(novelty)) #array of observation positions ('time')
 t = np.array(dates_int) 
 with pm.Model() as model: # context management
 
@@ -148,7 +148,7 @@ plt.fill_betweenx(
     color="C1",
 )
 
-# plotting with dates on x-axis
+#plotting with dates on x-axis
 plt.plot(dates_int, average_novelty, "k--", lw=2)
 locs, labels = plt.xticks()
 index = [i for i in range(len(dates_int)) if dates_int[i] in locs]
@@ -157,9 +157,10 @@ strings = [dates_str[i] for i in index]
 plt.xticks(ticks = np.arange(300, step = 50), labels = strings)
 plt.title('')
 
-# #old plot - number of days on x-axis
+# #plotting with n days on x-axis
 # plt.plot(dates_int, average_novelty, "k--", lw=2)
 # plt.title('')
 
-#pm.plot_posterior(trace, var_names = ["mu3"])
+
+# pm.plot_posterior(trace, var_names = ["mu3"])
 
